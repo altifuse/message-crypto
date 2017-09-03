@@ -6,6 +6,7 @@
 
     <groupId>arturhgca.datablink.messagecrypto</groupId>
     <artifactId>message-crypto</artifactId>
+    <name>Datablink Message Crypto</name>
     <version>1.0-SNAPSHOT</version>
 
     <!-- Spring Boot -->
@@ -25,6 +26,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!-- Spring Boot Security base -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 

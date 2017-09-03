@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Login | Datablink Message Crypto</title>
+    </head>
+    <body>
+        <h1>Datablink Message Crypto</h1>
+        <h2>Welcome!</h2>
+        <form th:action="@{/login}" method="post">
+            <p>Test with 'user' and 'password'</p>
+            <p th:if="${param.error}" class="alert alert-error">Wrong credentials!</p>
+            <p th:if="${param.logout}" class="alert alert-success">You have been logged out.</p>
+            <label for="username">Username</label>:
+            <input type="text" id="username" name="username" autofocus="autofocus"/>
+            <br/>
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password"/>
+            <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>
