@@ -14,8 +14,21 @@ To build this project from source, you will need:
 
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Maven](https://maven.apache.org/)
+- [MySQL](https://www.mysql.com/)
 
 ### Installing & Running
+
+#### Preparing the database
+
+In your MySQL server, run the following commands:
+
+```mysql
+create database datablink_message_crypto;
+create user 'dbmc_user'@'localhost' identified by 'dbmc_password'; -- If you wish to change these credentials, remember to change them in /src/main/resources/application.properties as well
+grant all on datablink_message_crypto.* to 'dbmc_user'@'localhost';
+```
+
+#### Running the application
 
 After you clone the repository, run the following command in the project root:
 
