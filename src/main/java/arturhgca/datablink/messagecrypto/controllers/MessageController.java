@@ -27,15 +27,23 @@ public class MessageController
         return "redirect:/cpanel.html";
     }
 
-    @RequestMapping("/decrypt")
-    public String decrypt()
+    @RequestMapping(value="/decrypt", method=RequestMethod.GET)
+    public String decrypt(Model model)
     {
+        // TO-DO: get Message object from storage -> decrypt and store in message.decryptedMessage -> send to model -> clear message.decryptedMessage
+        // (same as edit GET)
+        // placeholder:
+        model.addAttribute("message", new Message());
         return "decrypt";
     }
 
-    @RequestMapping("/view")
-    public String view()
+    @RequestMapping(value="/view", method =RequestMethod.GET)
+    public String view(Model model)
     {
+        // TO-DO: get Message object from storage -> send to model -> clear message.decryptedMessage
+        // (same as edit GET, but without decryption)
+        // placeholder:
+        model.addAttribute("message", new Message());
         return "view";
     }
 }
