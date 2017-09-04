@@ -7,10 +7,21 @@
     <body>
         <h1>Datablink Message Crypto</h1>
         <h2>Edit your message</h2>
-        <!-- TO-DO: edit form -->
+        <form id="messageForm"
+              th:action="@{/edit}"
+              th:object="${message}"
+              method="post">
+            <textarea name="message"
+                      rows="4"
+                      cols="50"
+                      th:field="*{decryptedMessage}"></textarea>
+            <input type="submit"
+                   value="Save"/>
+        </form>
         <br/>
         <form th:action="@{/logout}">
-            <input type="submit" value="Logout"/>
+            <input type="submit"
+                   value="Logout"/>
         </form>
     </body>
 </html>
