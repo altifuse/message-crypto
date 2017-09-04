@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .defaultSuccessUrl("/cpanel")
                 .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/cpanel");
+                .logoutSuccessUrl("/cpanel");
     }
 
     @Autowired

@@ -26,12 +26,14 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 ## Development Milestones
 
 - ~~Create base project~~
-- **Create basic HTML templates** ◀
+- ~~Create basic HTML templates~~
 - **Create corresponding beans** ◀
-- Implement persistence
+- **Implement persistence** ◀
 - Secure credentials
 - Implement message encryption/decryption
+- Implement input sanitization
 - Implement session management
+- Improve UI/UX
 
 ## Technologies
 
@@ -41,6 +43,7 @@ The project uses the following technologies (so far):
 - Framework: **[Spring](https://projects.spring.io/spring-framework/)** - specifically [Spring Boot](https://projects.spring.io/spring-boot/) for its ease of use
 - Template engine: **[Thymeleaf](http://www.thymeleaf.org/)** for being HTML-based
 - IDE: **[IntelliJ IDEA](https://www.jetbrains.com/idea/)**, because I'm used to and like PyCharm
+- Persistence: **[MySQL](https://www.mysql.com/)**
 
 ## Challenges
 
@@ -52,3 +55,4 @@ The project uses the following technologies (so far):
   - **Where to store the key?** If this key is generated upon successful login (by deriving the key at the same time the password is hashed in order to verify identity), where should it be stored for the current session?
   - ~~What to use as IV?~~ Randomly generate an IV for each new message and store it
   - **How to actually handle the encryption/decryption?** Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
+- ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
