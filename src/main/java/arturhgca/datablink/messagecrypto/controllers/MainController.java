@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController
 {
-    // Root: redirect to login page
+    // Root
     @RequestMapping("/")
     public String root()
     {
-        return "redirect:/login.html";
+        return "redirect:/cpanel.html";
     }
 
-    // Landing page with login form
     @RequestMapping("/login")
     public String login()
     {
@@ -24,5 +23,23 @@ public class MainController
     public String cpanel()
     {
         return "cpanel";
+    }
+
+    @RequestMapping("/edit")
+    public String edit()
+    {
+        return "edit";
+    }
+
+    @RequestMapping("/decrypt")
+    public String decrypt()
+    {
+        return "decrypt";
+    }
+
+    @RequestMapping("/view")
+    public String view()
+    {
+        return "view";
     }
 }

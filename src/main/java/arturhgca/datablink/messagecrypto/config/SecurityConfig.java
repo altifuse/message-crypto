@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -16,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
             .authorizeRequests()
-                .anyRequest().authenticated() // all pages require auth
+                .anyRequest().authenticated() // all other pages require auth
                 .and()
             .formLogin()
                 .loginPage("/login") // this is the login page
@@ -24,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .defaultSuccessUrl("/cpanel")
                 .and()
             .logout()
-                .permitAll(); // anyone can logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/cpanel");
     }
 
     @Autowired

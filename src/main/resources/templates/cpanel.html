@@ -5,7 +5,19 @@
         <title>Control Panel | Datablink Message Crypto</title>
     </head>
     <body>
-        <p>You are logged in!</p>
-        <!-- TO-DO: buttons for create/edit, view, decrypt, and logout -->
+        <h1>Datablink Message Crypto</h1>
+        <form th:action="@{/edit}">
+            <input type="submit" value="Edit Message"/>
+        </form>
+        <form th:action="@{/view}">
+        <input type="submit" value="View Stored Message"/>
+        </form>
+        <form th:action="@{/decrypt}">
+        <input type="submit" value="Decrypt Message"/>
+        </form>
+        <br/>
+        <form th:action="@{/logout}">
+            <input type="submit" value="Logout"/>
+        </form>
     </body>
 </html>
