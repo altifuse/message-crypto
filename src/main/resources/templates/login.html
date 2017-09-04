@@ -8,7 +8,7 @@
         <h1>Datablink Message Crypto</h1>
         <h2>Welcome!</h2>
         <form th:action="@{/login}" method="post">
-            <p>Test with 'user' and 'password'</p>
+            <p>Test with 'username' and 'password'</p>
             <p th:if="${param.error}" class="alert alert-error">Wrong credentials!</p>
             <p th:if="${param.logout}" class="alert alert-success">You have been logged out.</p>
             <label for="username">Username</label>:

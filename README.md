@@ -41,9 +41,9 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 - ~~Create base project~~
 - ~~Create basic HTML templates~~
 - **Create corresponding beans** ◀
-- **Implement persistence** ◀
-- Secure credentials
-- Implement message encryption/decryption
+- ~~Implement persistence~~ 
+- ~~Secure credentials~~
+- **Implement message encryption/decryption** ◀
 - Implement input sanitization
 - Implement session management
 - Improve UI/UX
