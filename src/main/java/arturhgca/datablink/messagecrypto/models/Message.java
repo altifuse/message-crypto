@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+/**
+ * This model contains all Message-related information
+ */
 @Entity
 public class Message
 {

@@ -80,7 +80,7 @@ The project uses the following technologies (so far):
 - ~~How to encrypt user messages?~~ AES256 seems to be the way to go. Problems to be solved in this case:
   - ~~What to use as key?~~ A key is derived from the user's password with BCrypt
   - ~~Where to store the key? If this key is generated upon successful login (by deriving the key at the same time the password is hashed in order to verify identity), where should it be stored for the current session?~~ When the user logs in, their credentials are stored in memory and, every time they save a message, a new encryption key is generated and its salt is stored in the database alongside the encrypted message
-  - ~~What to use as IV? Randomly generate an IV for each new message and store it~~ Since a new encryption key is used for each message, there is no need for an IV
+  - ~~What to use as IV? Randomly generate an IV for each new message and store it~~ Since a new encryption key is used for each message, there is no need for an IV; nonetheless, it is used
   - ~~How to actually handle the encryption/decryption?~~ Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
 - ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
   - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Furthermore, only the username needs to be filtered to protect against SQL injections, since all other fields are encrypted in the back-end.

@@ -3,6 +3,9 @@ package arturhgca.datablink.messagecrypto.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * This model contains all User-related information
+ */
 @Entity
 public class User
 {

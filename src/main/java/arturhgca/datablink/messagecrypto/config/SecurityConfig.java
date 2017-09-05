@@ -12,19 +12,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ * This class manages all Spring Security settings related to authentication
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+    /**
+     * This autowired property implements the DataSource set in the application.properties file
+     */
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * This bean implements the BCrypt password encoder used for authentication
+     * @return The PasswordEncoder instance used in all auth business
+     */
     @Bean
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder(12);
     }
 
+    /**
+     * This method sets which pages require auth and authorization level, if applicable
+     * @param http The HTTP connector (switched for a HTTPS one) that handles requests
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
@@ -41,6 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .logoutSuccessUrl("/cpanel");
     }
 
+    /**
+     *
+     * @param auth Object responsible for checking credentials against the database
+     * @throws Exception
+     */
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
     {
