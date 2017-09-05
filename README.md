@@ -12,7 +12,7 @@ This is a self-contained web application. Therefore, after building, you only ne
 
 To build this project from source, you will need:
 
-- [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) + [JCE Unlimited Strenth Jurisdiction Policy Files 8](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
+- [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) + [JCE Unlimited Strength Jurisdiction Policy Files 8](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html)
 - [Maven](https://maven.apache.org/)
 - [MySQL](https://www.mysql.com/)
 
@@ -82,4 +82,3 @@ The project uses the following technologies (so far):
   - ~~How to actually handle the encryption/decryption?~~ Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
 - ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
   - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Furthermore, only the username needs to be filtered to protect against SQL injections, since all other fields are encrypted in the back-end.
-
