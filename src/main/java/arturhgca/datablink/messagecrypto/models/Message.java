@@ -1,5 +1,6 @@
 package arturhgca.datablink.messagecrypto.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -9,8 +10,12 @@ public class Message
 {
     @Id
     private String username;
+    @Column(columnDefinition = "TEXT")
     private String encryptedMessage;
-    private String initializationVector;
+    @Column(columnDefinition = "TEXT")
+    private String cryptoKeySalt;
+    @Column(columnDefinition = "TEXT")
+    private String cryptoSalt;
 
     @Transient
     private String decryptedMessage;
@@ -45,13 +50,23 @@ public class Message
         this.decryptedMessage = decryptedMessage;
     }
 
-    public String getInitializationVector()
+    public String getCryptoKeySalt()
     {
-        return initializationVector;
+        return cryptoKeySalt;
     }
 
-    public void setInitializationVector(String initializationVector)
+    public void setCryptoKeySalt(String cryptoKeySalt)
     {
-        this.initializationVector = initializationVector;
+        this.cryptoKeySalt = cryptoKeySalt;
+    }
+
+    public String getCryptoSalt()
+    {
+        return cryptoSalt;
+    }
+
+    public void setCryptoSalt(String cryptoSalt)
+    {
+        this.cryptoSalt = cryptoSalt;
     }
 }

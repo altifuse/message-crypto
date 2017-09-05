@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
     {
         auth
+            .eraseCredentials(false) // so we can use the password to create an encryption key for messages
             .jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
