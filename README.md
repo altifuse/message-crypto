@@ -6,7 +6,7 @@ It offers to registered users an interface to save, read and decrypt a secret me
 
 ## How to use?
 
-This is a self-contained web application. Therefore, after building, you only need to run the jar file and enter the application through your favorite web browser at http://{your_ip_or_hostname}:8080/ (to be changed to HTTPS).
+This is a self-contained web application. Therefore, after building, you only need to run the jar file and enter the application through your favorite web browser at https://{your_ip_or_hostname}:8443/.
 
 ### Prerequisites
 
@@ -39,6 +39,8 @@ After you clone the repository, run the following command in the project root:
 `mvn clean install spring-boot:run`
 
 This will remove any previous builds, create a uber-jar (that is, a jar file which contains all needed dependencies), and run it.
+
+**About SSL:** the source includes a locally-generated certificate for testing purposes. For deployment, you may (and *should*) replace it with a real certificate and reflect this change in  `src/main/resources/application.properties`. A free option is [Let's Encrypt](https://letsencrypt.org/), an organization backed by the Linux Foundation, Mozilla, and others.
 
 ## Development
 
