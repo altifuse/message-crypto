@@ -36,7 +36,13 @@ After you clone the repository, run the following command in the project root:
 
 This will remove any previous builds, create a uber-jar (that is, a jar file which contains all needed dependencies), and run it.
 
-## Development Milestones
+## Development
+
+### Architecture
+
+![](https://raw.githubusercontent.com/arturhgca/message-crypto/master/docs/architectural_diagram.png)
+
+### Milestones
 
 - ~~Create base project~~
 - ~~Create basic HTML templates~~
