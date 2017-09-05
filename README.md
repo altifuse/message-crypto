@@ -40,7 +40,7 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 
 - ~~Create base project~~
 - ~~Create basic HTML templates~~
-- **Create corresponding beans** ◀
+- **Create corresponding controllers** ◀
 - ~~Implement persistence~~ 
 - ~~Secure credentials~~
 - **Implement message encryption/decryption** ◀
