@@ -61,7 +61,6 @@ public class MessageController
         String username = Util.getUsername();
         message.setUsername(username);
 
-        // TO-DO: filter
         message = encryptMessage(message);
         messageRepository.save(message);
 
@@ -126,7 +125,8 @@ public class MessageController
     private Message encryptMessage(Message message)
     {
         Object credentials = Util.getCredentials();
-        String cryptoKey = bCryptPasswordEncoder.encode(credentials.toString()); // bcrypt: $version$cost$salthash, with 22 chars for salt
+        // bcrypt: $version$cost$salthash, with 22 chars for salt
+        String cryptoKey = bCryptPasswordEncoder.encode(credentials.toString());
         // Spring BCrypt considers version and cost as part of the salt, so:
         String cryptoKeySalt = cryptoKey.substring(0, 29);
         message.setCryptoKeySalt(cryptoKeySalt);

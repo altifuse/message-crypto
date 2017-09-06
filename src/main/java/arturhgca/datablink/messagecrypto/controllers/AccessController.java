@@ -63,8 +63,6 @@ public class AccessController
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@Valid @ModelAttribute User user, BindingResult bindingResult)
     {
-        // TO-DO: filter
-
         if(bindingResult.hasErrors())
         {
             return "register";

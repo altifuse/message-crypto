@@ -56,7 +56,7 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 - ~~Implement persistence~~ 
 - ~~Secure credentials~~
 - ~~Implement message encryption/decryption~~
-- **Implement input sanitization** ◀
+- ~~Implement input sanitization~~
 - **Improve documentation** ◀
 - **Treat exceptions** ◀
 - Improve UI/UX
@@ -84,4 +84,5 @@ The project uses the following technologies (so far):
   - ~~What to use as IV? Randomly generate an IV for each new message and store it~~ Since a new encryption key is used for each message, there is no need for an IV; nonetheless, it is used
   - ~~How to actually handle the encryption/decryption?~~ Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
 - ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
-  - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Furthermore, only the username needs to be filtered to protect against SQL injections, since all other fields are encrypted in the back-end.
+  - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Because of this, there is no need to worry about SQL injections.
+  - About XSS: Thymeleaf already HTML escapes all output unless it's in a `th:utext` (unescaped) field.
