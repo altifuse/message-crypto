@@ -52,15 +52,16 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 
 - ~~Create base project~~
 - ~~Create basic HTML templates~~
-- **Create corresponding controllers** ◀
+- ~~Create corresponding controllers~~
 - ~~Implement persistence~~ 
 - ~~Secure credentials~~
 - ~~Implement message encryption/decryption~~
 - **Implement input sanitization** ◀
-- Implement session management
-- Improve documentation
-- Treat exceptions
+- **Improve documentation** ◀
+- **Treat exceptions** ◀
 - Improve UI/UX
+- Implement unit tests
+- Implement stateless session management
 
 ## Technologies
 

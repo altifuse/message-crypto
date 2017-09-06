@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.keygen.KeyGenerators;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,10 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MessageController
 {
     /**
-     *  This autowired property implements the Repository connected to the Message model
+     * This autowired property implements the Repository connected to the Message model
      */
     @Autowired
     private MessageRepository messageRepository;
+
+    /**
+     * This autowired property enables access to the password encoder used for authentication
+     */
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * Maps and handles custom behavior in the Edit page (GET mode)
@@ -120,9 +125,8 @@ public class MessageController
      */
     private Message encryptMessage(Message message)
     {
-        PasswordEncoder encoder = new BCryptPasswordEncoder(12);
         Object credentials = Util.getCredentials();
-        String cryptoKey = encoder.encode(credentials.toString()); // bcrypt: $version$cost$salthash, with 22 chars for salt
+        String cryptoKey = bCryptPasswordEncoder.encode(credentials.toString()); // bcrypt: $version$cost$salthash, with 22 chars for salt
         // Spring BCrypt considers version and cost as part of the salt, so:
         String cryptoKeySalt = cryptoKey.substring(0, 29);
         message.setCryptoKeySalt(cryptoKeySalt);

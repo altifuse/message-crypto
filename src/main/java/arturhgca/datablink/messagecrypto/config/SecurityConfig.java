@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
             .authorizeRequests()
+                .antMatchers("/register").permitAll() // registration page is open
                 .anyRequest().authenticated() // all other pages require auth
                 .and()
             .formLogin()
@@ -53,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .defaultSuccessUrl("/cpanel")
                 .and()
             .logout()
-                .logoutSuccessUrl("/cpanel");
+                .logoutSuccessUrl("/login");
     }
 
     /**
@@ -71,9 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username=?")
                 // workaround, since this application does not use roles:
-                .authoritiesByUsernameQuery("SELECT username, 'default' FROM user WHERE username=?")
-                .and()
-            .inMemoryAuthentication()
-                .withUser("username").password("password").roles("USER");
+                .authoritiesByUsernameQuery("SELECT username, 'default' FROM user WHERE username=?");
     }
 }

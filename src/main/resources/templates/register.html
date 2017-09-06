@@ -2,34 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8"/>
-        <title>Login | Datablink Message Crypto</title>
+        <title>Create User | Datablink Message Crypto</title>
     </head>
     <body>
         <h1>Datablink Message Crypto</h1>
         <h2>Welcome!</h2>
-        <form th:action="@{/login}"
+        <form th:action="@{/register}"
+              th:object="${user}"
               method="post">
-            <p th:if="${param.error}"
-               class="alert alert-error">Wrong credentials!</p>
-            <p th:if="${param.logout}"
-               class="alert alert-success">You have been logged out.</p>
+            <p>Create a new user</p>
+            <div class="alert alert-error" th:if="${#fields.hasErrors('*')}">
+                <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+            </div>
             <label for="username">Username</label>:
             <input type="text"
                    id="username"
                    name="username"
-                   autofocus="autofocus"/>
+                   autofocus="autofocus"
+                   th:field="*{username}"/>
             <br/>
             <label for="password">Password</label>:
             <input type="password"
                    id="password"
-                   name="password"/>
+                   name="password"
+                   th:field="*{password}"/>
             <input type="submit"
-                   value="Login"/>
-        </form>
-        <form th:action="@{/register}"
-              method="get">
-            <input type="submit"
-                   value="Register"/>
+                   value="Create"/>
         </form>
     </body>
 </html>
