@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
             .authorizeRequests()
-                .antMatchers("/register").permitAll() // registration page is open
+                // registration page is open, as well as the static resources
+                .antMatchers("/register", "/resources/**", "/resources/static/**", "/css/**").permitAll()
                 .anyRequest().authenticated() // all other pages require auth
                 .and()
             .formLogin()

@@ -59,7 +59,7 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 - ~~Implement input sanitization~~
 - **Improve documentation** ◀
 - **Treat exceptions** ◀
-- Improve UI/UX
+- ~~Improve UI/UX~~
 - Implement unit tests
 - Implement stateless session management
 
@@ -72,6 +72,7 @@ The project uses the following technologies (so far):
 - Template engine: **[Thymeleaf](http://www.thymeleaf.org/)** for being HTML-based
 - IDE: **[IntelliJ IDEA](https://www.jetbrains.com/idea/)**, because I'm used to and like PyCharm
 - Persistence: **[MySQL](https://www.mysql.com/)**
+- CSS framework: [**Materialize**](http://materializecss.com/) with [jQuery](https://jquery.com/)
 
 ## Challenges
 
@@ -84,5 +85,5 @@ The project uses the following technologies (so far):
   - ~~What to use as IV? Randomly generate an IV for each new message and store it~~ Since a new encryption key is used for each message, there is no need for an IV; nonetheless, it is used
   - ~~How to actually handle the encryption/decryption?~~ Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
 - ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
-  - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Because of this, there is no need to worry about SQL injections.
-  - About XSS: Thymeleaf already HTML escapes all output unless it's in a `th:utext` (unescaped) field.
+  - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Because of this, there is no need to worry about SQL injections
+  - About XSS: Thymeleaf already HTML escapes all output unless it's in a `th:utext` (unescaped) field

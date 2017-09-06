@@ -1,33 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link rel="stylesheet"
+              href="../static/main.css"
+              th:href="@{css/main.css}"/>
         <title>Create User | Datablink Message Crypto</title>
     </head>
     <body>
-        <h1>Datablink Message Crypto</h1>
-        <h2>Welcome!</h2>
-        <form th:action="@{/register}"
-              th:object="${user}"
-              method="post">
-            <p>Create a new user</p>
-            <div class="alert alert-error" th:if="${#fields.hasErrors('*')}">
-                <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        <div class="mainFrame">
+            <div style="clear: both">
+                <h3>Datablink Message Crypto</h3>
+                <h4>Register</h4>
             </div>
-            <label for="username">Username</label>:
-            <input type="text"
-                   id="username"
-                   name="username"
-                   autofocus="autofocus"
-                   th:field="*{username}"/>
+            <form th:action="@{/register}"
+                  th:object="${user}"
+                  method="post"
+                  class="form">
+                <div class="alert alert-error" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+                <label for="username">Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       autofocus="autofocus"
+                       th:field="*{username}"/>
+                <br/>
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       th:field="*{password}"/>
+                <br/>
+                <button class="btn waves-effect waves-light green" type="submit" name="register">Create</button>
+            </form>
             <br/>
-            <label for="password">Password</label>:
-            <input type="password"
-                   id="password"
-                   name="password"
-                   th:field="*{password}"/>
-            <input type="submit"
-                   value="Create"/>
-        </form>
+            <form th:action="@{/login}"
+                  method="get"
+                  class="form">
+                <button class="btn waves-effect waves-light blue" type="submit" name="login">Return to Login</button>
+            </form>
+        </div>
     </body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>

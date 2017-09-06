@@ -1,35 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link rel="stylesheet"
+              href="../static/main.css"
+              th:href="@{css/main.css}"/>
         <title>Login | Datablink Message Crypto</title>
     </head>
     <body>
-        <h1>Datablink Message Crypto</h1>
-        <h2>Welcome!</h2>
-        <form th:action="@{/login}"
-              method="post">
-            <p th:if="${param.error}"
-               class="alert alert-error">Wrong credentials!</p>
-            <p th:if="${param.logout}"
-               class="alert alert-success">You have been logged out.</p>
-            <label for="username">Username</label>:
-            <input type="text"
-                   id="username"
-                   name="username"
-                   autofocus="autofocus"/>
+        <div class="mainFrame">
+            <h1>Datablink Message Crypto</h1>
+            <h2>Welcome!</h2>
+            <form th:action="@{/login}"
+                  method="post"
+                  class="form">
+                <p th:if="${param.error}"
+                   class="alert alert-error">Wrong credentials!</p>
+                <p th:if="${param.logout}"
+                   class="alert alert-success">You have been logged out.</p>
+                <label for="username">Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       autofocus="autofocus"/>
+                <br/>
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"/>
+                <br/>
+                <button class="btn waves-effect waves-light green" type="submit" name="login">Login</button>
+            </form>
             <br/>
-            <label for="password">Password</label>:
-            <input type="password"
-                   id="password"
-                   name="password"/>
-            <input type="submit"
-                   value="Login"/>
-        </form>
-        <form th:action="@{/register}"
-              method="get">
-            <input type="submit"
-                   value="Register"/>
-        </form>
+            <form th:action="@{/register}"
+                  method="get"
+                  class="form">
+                <button class="btn waves-effect waves-light blue" type="submit" name="register">Register</button>
+            </form>
+        </div>
     </body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>

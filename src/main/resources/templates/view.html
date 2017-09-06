@@ -2,26 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link rel="stylesheet"
+              href="../static/main.css"
+              th:href="@{css/main.css}"/>
         <title>View Message | Datablink Message Crypto</title>
     </head>
     <body>
-        <h1>Datablink Message Crypto</h1>
-        <h2>View your message</h2>
-        <form id="messageForm"
-              th:object="${message}"
-              method="post">
-            <textarea name="message"
-                      rows="4"
-                      cols="50"
-                      th:field="*{encryptedMessage}"
-                      readonly="readonly"></textarea>
-        </form>
-        <br/>
-        <form th:action="@{/cpanel}">
-            <input type="submit" value="Control Panel"/>
-        </form>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout"/>
-        </form>
+        <div class="mainFrame">
+            <div style="clear: both">
+                <h3>Datablink Message Crypto</h3>
+                <h4>View your message</h4>
+            </div>
+            <form id="messageForm"
+                  th:object="${message}"
+                  method="post"
+                  class="form">
+                <div class="input-field">
+                    <textarea name="message"
+                              id="message"
+                              th:field="*{encryptedMessage}"
+                              readonly="readonly"
+                              class="materialize-textarea"></textarea>
+                </div>
+            </form>
+            <br/>
+            <form th:action="@{/cpanel}"
+                  class="form">
+                <button class="btn waves-effect waves-light blue" type="submit" name="cpanel">Control Panel</button>
+            </form>
+            <br/>
+            <form th:action="@{/logout}"
+                  method="post"
+                  class="form">
+                <button class="btn waves-effect waves-light orange" type="submit" name="logout">Logout</button>
+            </form>
+        </div>
     </body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>

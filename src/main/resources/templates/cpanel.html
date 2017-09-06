@@ -2,22 +2,58 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+        <link rel="stylesheet"
+              href="../static/main.css"
+              th:href="@{css/main.css}"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <title>Control Panel | Datablink Message Crypto</title>
     </head>
     <body>
-        <h1>Datablink Message Crypto</h1>
-        <form th:action="@{/edit}">
-            <input type="submit" value="Edit Message"/>
-        </form>
-        <form th:action="@{/view}">
-        <input type="submit" value="View Stored Message"/>
-        </form>
-        <form th:action="@{/decrypt}">
-        <input type="submit" value="Decrypt Message"/>
-        </form>
-        <br/>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Logout"/>
-        </form>
+        <div class="mainFrame">
+            <div style="clear: both">
+                <h3>Datablink Message Crypto</h3>
+                <h4>Control Panel</h4>
+            </div>
+            <form th:action="@{/edit}"
+                  class="form"
+                  style="display: inline-block; vertical-align: top; width: 10%; margin-left: 0%; margin-top: 3%; margin-bottom: 3%">
+                <button class="btn-floating btn-large waves-effect waves-light blue"
+                        type="submit"
+                        name="edit"
+                        title="Edit your message">
+                    <i class="material-icons">edit</i>
+                </button>
+            </form>
+            <form th:action="@{/view}"
+                  class="form"
+                  style="display: inline-block; vertical-align: top; width: 10%; margin-left: 0%; margin-top: 3%; margin-bottom: 3%">
+                <button class="btn-floating btn-large waves-effect waves-light blue"
+                        type="submit"
+                        name="view"
+                        title="View your message">
+                    <i class="material-icons">pageview</i>
+                </button>
+            </form>
+            <form th:action="@{/decrypt}"
+                  class="form"
+                  style="display: inline-block; vertical-align: top; width: 10%; margin-left: 0%; margin-top: 3%; margin-bottom: 3%">
+                <button class="btn-floating btn-large waves-effect waves-light blue"
+                        type="submit"
+                        name="decrypt"
+                        title="Decrypt your message">
+                    <i class="material-icons">vpn_key</i>
+                </button>
+            </form>
+            <br/>
+            <form th:action="@{/logout}"
+                  method="post"
+                  class="form">
+                <button class="btn waves-effect waves-light orange" type="submit" name="logout">Logout</button>
+            </form>
+        </div>
     </body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </html>

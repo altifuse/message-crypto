@@ -42,6 +42,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!-- jQuery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.2.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -62,6 +68,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>arturhgca.datablink.messagecrypto.Main</mainClass>
+                    <!-- to automatically reload static resources -->
+                    <addResources>true</addResources>
                     <layout>JAR</layout>
                 </configuration>
             </plugin>
