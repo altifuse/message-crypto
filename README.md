@@ -77,13 +77,25 @@ The project uses the following technologies (so far):
 ## Challenges
 
 - ~~Which template engine to use?~~ There isn't a big reasoning behind choosing Thymeleaf over something like Freemarker, I just chose something to learn about
+
 - ~~How to manage sessions RESTfully?~~ Sessions should be handled statelessly, by tokens; one option is [JWT](https://jwt.io/)
+
 - ~~How to store user credentials?~~ The [Spring Security](https://projects.spring.io/spring-security/) module offers password encryption with BCrypt
+
 - ~~How to encrypt user messages?~~ AES256 seems to be the way to go. Problems to be solved in this case:
   - ~~What to use as key?~~ A key is derived from the user's password with BCrypt
   - ~~Where to store the key? If this key is generated upon successful login (by deriving the key at the same time the password is hashed in order to verify identity), where should it be stored for the current session?~~ When the user logs in, their credentials are stored in memory and, every time they save a message, a new encryption key is generated and its salt is stored in the database alongside the encrypted message
   - ~~What to use as IV? Randomly generate an IV for each new message and store it~~ Since a new encryption key is used for each message, there is no need for an IV; nonetheless, it is used
   - ~~How to actually handle the encryption/decryption?~~ Spring Security has this covered, but it needs [Oracle JCE](https://stackoverflow.com/questions/6481627/java-security-illegal-key-size-or-default-parameters/6481658#6481658) for the app to run because of JRE limitations
+
 - ~~How to prevent SQL injections/XSS?~~ Parameterized queries for SQL and input sanitization, such as HTML escaping.
   - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Because of this, there is no need to worry about SQL injections
   - About XSS: Thymeleaf already HTML escapes all output unless it's in a `th:utext` (unescaped) field
+
+- **How to correctly handle exceptions in a Spring Web application?** By default, Spring Boot handles all exceptions by redirecting the user to the existing `/error` views. This is an easy solution and sufficient from the point of view of an end user, but it has a flaw that affects both developers and applications that may rely on a REST API: it does not forward *what* happened. On the other hand, letting the user know what kind of error was thrown may not be a good idea from a security perspective. For this case, I'm still not sure of how this should be dealt with. Basically, the options are:
+
+  - Leave the error handling as-is, that is, set the error templates up and let Spring deal with them;
+  - Disable Spring's own error mappings and handle exceptions manually.
+
+  Currently, I'm using a mix of these two approaches: errors directly related to user experience are handled manually (e.g. user/password/message length), while internal errors are handled by Spring.
+

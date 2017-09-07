@@ -13,7 +13,7 @@ public class Message
 {
     @Id
     private String username;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String encryptedMessage;
     @Column(columnDefinition = "TEXT")
     private String cryptoKeySalt;

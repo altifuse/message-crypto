@@ -5,6 +5,7 @@ import arturhgca.datablink.messagecrypto.models.Message;
 import arturhgca.datablink.messagecrypto.persistence.MessageRepository;
 import arturhgca.datablink.messagecrypto.security.CustomBCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -58,14 +59,21 @@ public class MessageController
     @RequestMapping(value="/edit", method=RequestMethod.POST)
     public String submit(@ModelAttribute Message message)
     {
-        String username = Util.getUsername();
-        message.setUsername(username);
+        try
+        {
+            String username = Util.getUsername();
+            message.setUsername(username);
 
-        message = encryptMessage(message);
-        messageRepository.save(message);
+            message = encryptMessage(message);
+            messageRepository.save(message);
 
-        // TO-DO: redirect and show a success message
-        return "redirect:/cpanel.html";
+            // TO-DO: redirect and show a success message
+            return "redirect:/cpanel.html";
+        }
+        catch(DataIntegrityViolationException ex) // message is too long for DB field
+        {
+            return "redirect:/edit?error";
+        }
     }
 
     /**

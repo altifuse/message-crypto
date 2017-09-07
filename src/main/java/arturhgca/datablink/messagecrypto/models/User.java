@@ -17,7 +17,7 @@ public class User
     @Size(min=8, message = "Password must contain at least 8 characters")
     private String password;
 
-    private final Boolean enabled = true; // Spring Security needs this property
+    private static final Boolean enabled = true; // Spring Security needs this property
 
     public String getUsername()
     {

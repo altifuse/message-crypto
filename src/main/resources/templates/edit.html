@@ -20,6 +20,8 @@
                   th:object="${message}"
                   method="post"
                   class="form">
+                <p th:if="${param.error}"
+                   class="alert alert-error">Could not save message. Please check if it isn't too long (max 65.536 characters after encryption).</p>
                 <div class="input-field">
                     <textarea name="message"
                               id="message"

@@ -1,5 +1,6 @@
 package arturhgca.datablink.messagecrypto;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -23,6 +24,15 @@ public final class Util
     public static Object getCredentials()
     {
         return SecurityContextHolder.getContext().getAuthentication().getCredentials();
+    }
+
+    /**
+     * Gets the auth object of the current user
+     * @return Authentication information
+     */
+    public static Authentication getAuthentication()
+    {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 
     /**
