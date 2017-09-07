@@ -4,6 +4,10 @@ Datablink Message Crypto is a web application developed to demonstrate my workfl
 
 It offers to registered users an interface to save, read and decrypt a secret message that only they can access.
 
+## Check it out!
+
+A test deploy is currently available at [Heroku](https://boiling-savannah-18733.herokuapp.com).
+
 ## How to use?
 
 This is a self-contained web application. Therefore, after building, you only need to run the jar file and enter the application through your favorite web browser at https://{your_ip_or_hostname}:8443/.
