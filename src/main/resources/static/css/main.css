@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
+body
+{
+    background-color: #F7FAFF;
+}
+
+.mainFrame
+{
+    display: table;
+
+    width: 50vw;
+    height: 50vh;
+
+    margin-left: 25vw;
+    margin-top: 25vh;
+    margin-right: 25vw;
+    margin-bottom: 25vh;
+
+    border: none;
+
+    text-align: center;
+    vertical-align: middle;
+
+    font-family: 'Roboto', sans-serif;
+
+    background-color: #F7FAFF;
+}
+
+h1, h2, h3, h4
+{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form
+{
+    margin-left: 35%;
+    width: 30%;
+    clear: both;
+}
+
+.form input
+{
+    width: 100%;
+    clear: both;
+}
+
+textarea
+{
+    width: 200% !important;
+    margin-left: -50% !important;
+    resize: none;
+}
+
+p
+{
+    font-size: 16pt;
+    text-align: center;
+}
+
+label
+{
+    font-size: 12pt;
+}
+
+.form input[type=text],
+.form input[type=password]
+{
+    text-align: center;
+    font-size: 20pt;
+}
