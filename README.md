@@ -32,6 +32,14 @@ grant all on datablink_message_crypto.* to 'dbmc_user'@'localhost';
 
 This application uses AES-256 to secure user messages. Because of US cryptography export laws, JRE only has native support for up to 128-bit encryption. In order to use longer keys, the Java Cryptography Extension files are needed. The package contains detailed installation instructions. **Important:** the files should be placed inside the `jre/lib/security` directory in the `jdk` path.
 
+**Note for OpenJDK users:** you probably don't need the JCE files. Run the following command:
+
+```shell
+jrunscript -e 'print (javax.crypto.Cipher.getMaxAllowedKeyLength("AES") >= 256);'
+```
+
+If it returns `true`, you are ready to go.
+
 #### Running the application
 
 After you clone the repository, run the following command in the project root:
@@ -98,4 +106,3 @@ The project uses the following technologies (so far):
   - Disable Spring's own error mappings and handle exceptions manually.
 
   Currently, I'm using a mix of these two approaches: errors directly related to user experience are handled manually (e.g. user/password/message length), while internal errors are handled by Spring.
-
