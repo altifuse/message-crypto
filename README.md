@@ -70,9 +70,9 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 - ~~Implement message encryption/decryption~~
 - ~~Implement input sanitization~~
 - **Improve documentation** ◀
-- **Treat exceptions** ◀
+- ~~Treat exceptions~~
 - ~~Improve UI/UX~~
-- Implement unit tests
+- **Implement unit tests** ◀
 - Implement stateless session management
 
 ## Technologies
@@ -90,7 +90,7 @@ The project uses the following technologies (so far):
 
 - ~~Which template engine to use?~~ There isn't a big reasoning behind choosing Thymeleaf over something like Freemarker, I just chose something to learn about
 
-- ~~How to manage sessions RESTfully?~~ Sessions should be handled statelessly, by tokens; one option is [JWT](https://jwt.io/)
+- ~~How to manage sessions RESTfully?~~ Sessions should be handled statelessly, by tokens; one option is [JWT](https://jwt.io/). Spring Security already implements CSRF protection by using session tokens, albeit not JSON-based ones
 
 - ~~How to store user credentials?~~ The [Spring Security](https://projects.spring.io/spring-security/) module offers password encryption with BCrypt
 
@@ -110,3 +110,6 @@ The project uses the following technologies (so far):
   - Disable Spring's own error mappings and handle exceptions manually.
 
   Currently, I'm using a mix of these two approaches: errors directly related to user experience are handled manually (e.g. user/password/message length), while internal errors are handled by Spring.
+
+- ~~How to create unit tests for a Spring Web MVC application?~~ Unit tests for a web controller, for instance, should be able to mock a request and verify the correct handling of resources, such as validation and mapping. Spring Boot has a [base dependency](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html) available that includes not only their own testing library for Spring applications but also many other tools such as [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/).
+
