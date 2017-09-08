@@ -100,7 +100,7 @@ public class MessageController
      * @param model The information that is bound to the HTML form
      * @return Custom message sent to the client
      */
-    @RequestMapping(value="/view", method =RequestMethod.GET)
+    @RequestMapping(value="/view", method=RequestMethod.GET)
     public String view(Model model)
     {
         String username = Util.getUsername();

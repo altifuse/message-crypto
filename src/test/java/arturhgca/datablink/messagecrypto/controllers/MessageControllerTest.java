@@ -7,20 +7,29 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 public class MessageControllerTest
 {
     // tests follow the pattern what_when_then
@@ -34,6 +43,9 @@ public class MessageControllerTest
             return new MessageController();
         }
     }
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Autowired
     private MessageController messageController;
@@ -142,5 +154,69 @@ public class MessageControllerTest
         assertThat(response.getCryptoKeySalt(), nullValue());
         assertThat(response.getCryptoSalt(), nullValue());
         assertThat(response.getEncryptedMessage(), nullValue());
+    }
+
+    // VIEWS
+
+    // edit
+    @Test
+    @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
+    public void editGET_userIsLoggedIn_returnModelWithMessage() throws Exception
+    {
+        mockMvc.perform(get("/edit"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("message",
+                        hasProperty("decryptedMessage", is("message"))));
+    }
+
+    // submit
+    @Test
+    @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
+    public void editPOST_userIsLoggedInAndMessageIsValid_returnToControlPanel() throws Exception
+    {
+        Message message = messageRepository.findOne("userHasMessage"); // using predefined mock
+        mockMvc.perform(post("/edit")
+                    .with(csrf())
+                    .param("decryptedMessage", message.getDecryptedMessage()))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/cpanel.html"));
+    }
+
+    @Test
+    @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
+    public void editPOST_userIsLoggedInAndMessageIsTooLong_returnToControlPanel() throws Exception
+    {
+        Message message = messageRepository.findOne("userHasMessage"); // using predefined mock
+
+        Mockito.when(messageRepository.save(org.mockito.Matchers.any(Message.class))).thenThrow(DataIntegrityViolationException.class);
+
+        mockMvc.perform(post("/edit")
+                .with(csrf())
+                .param("decryptedMessage", message.getDecryptedMessage()))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/edit?error"));
+    }
+
+    // decrypt
+    @Test
+    @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
+    public void decrypt_userIsLoggedIn_returnModelWithMessage() throws Exception
+    {
+        mockMvc.perform(get("/decrypt"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("message",
+                        hasProperty("decryptedMessage", is("message"))));
+    }
+
+    // view
+    @Test
+    @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
+    public void view_userIsLoggedIn_returnModelWithMessage() throws Exception
+    {
+        mockMvc.perform(get("/view"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("message",
+                        hasProperty("encryptedMessage",
+                                is("99d0ef2a701b21838e2ebceaa9c305c63f189ea92f327e8763f5a24f460810bb"))));
     }
 }
