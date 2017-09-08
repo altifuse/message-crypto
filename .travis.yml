@@ -7,4 +7,4 @@ os:
   - linux
 
 script:
-  - mvn clean install spring-boot:run
+  - mvn clean install
