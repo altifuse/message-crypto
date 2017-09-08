@@ -8,3 +8,20 @@ os:
 
 script:
   - mvn clean install
+
+services:
+  - mysql
+
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - mysql-server-5.7
+      - mysql-client-core-5.7
+      - mysql-client-5.7
+
+before_script:
+  - mysql -u root -e "create database datablink_message_crypto;"
+  - mysql -u root -e "create user 'dbmc_user'@'localhost' identified by 'dbmc_password';"
+  - mysql -u root -e "grant all on datablink_message_crypto.* to 'dbmc_user'@'localhost';"
