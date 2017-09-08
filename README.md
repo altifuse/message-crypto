@@ -1,4 +1,4 @@
-# Message Crypto
+# Message Crypto [![Build Status](https://travis-ci.org/arturhgca/message-crypto.svg?branch=master)](https://travis-ci.org/arturhgca/message-crypto)
 
 Datablink Message Crypto is a web application developed to demonstrate my workflow, my programming abilities and, most importantly, my learning capacities.
 
