@@ -104,7 +104,7 @@ The project uses the following technologies (so far):
   - With the Spring Boot JPA implementation, the simple database access this application needs doesn't need custom queries. Because of this, there is no need to worry about SQL injections
   - About XSS: Thymeleaf already HTML escapes all output unless it's in a `th:utext` (unescaped) field
 
-- **How to correctly handle exceptions in a Spring Web application?** By default, Spring Boot handles all exceptions by redirecting the user to the existing `/error` views. This is an easy solution and sufficient from the point of view of an end user, but it has a flaw that affects both developers and applications that may rely on a REST API: it does not forward *what* happened. On the other hand, letting the user know what kind of error was thrown may not be a good idea from a security perspective. For this case, I'm still not sure of how this should be dealt with. Basically, the options are:
+- ~~How to correctly handle exceptions in a Spring Web application?~~ By default, Spring Boot handles all exceptions by redirecting the user to the existing `/error` views. This is an easy solution and sufficient from the point of view of an end user, but it has a flaw that affects both developers and applications that may rely on a REST API: it does not forward *what* happened. On the other hand, letting the user know what kind of error was thrown may not be a good idea from a security perspective. For this case, I'm still not sure which is the best approach. Basically, the options are:
 
   - Leave the error handling as-is, that is, set the error templates up and let Spring deal with them;
   - Disable Spring's own error mappings and handle exceptions manually.
@@ -112,4 +112,7 @@ The project uses the following technologies (so far):
   Currently, I'm using a mix of these two approaches: errors directly related to user experience are handled manually (e.g. user/password/message length), while internal errors are handled by Spring.
 
 - ~~How to create unit tests for a Spring Web MVC application?~~ Unit tests for a web controller, for instance, should be able to mock a request and verify the correct handling of resources, such as validation and mapping. Spring Boot has a [base dependency](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html) available that includes not only their own testing library for Spring applications but also many other tools such as [Mockito](http://mockito.org/) and [Hamcrest](http://hamcrest.org/JavaHamcrest/).
+
+- ~~Should the architecture include a Service layer?~~ When studying about unit testing in Spring, I understood that a separation of business logic from the controllers would make maintaining and testing the code easier. But I don't think such a change would be valid at the current stage of the project (testing and finalizing). Nevertheless, it's something I've learned.
+
 

@@ -115,7 +115,7 @@ public class MessageController
      * @param username The username to be used as parameter in the query
      * @return The message found in the database or a new one if none is found
      */
-    private Message getMessage(String username)
+    Message getMessage(String username)
     {
         Message message = messageRepository.findOne(username);
         if(message == null)
@@ -130,7 +130,7 @@ public class MessageController
      * @param message The object that contains the message to be encrypted
      * @return The Message object with the encrypted message and the decryptedMessage field cleared
      */
-    private Message encryptMessage(Message message)
+    Message encryptMessage(Message message)
     {
         Object credentials = Util.getCredentials();
         // bcrypt: $version$cost$salthash, with 22 chars for salt
@@ -151,7 +151,7 @@ public class MessageController
      * @param message The object that contains the message to be decrypted and its encryption information
      * @return The Message object with the decrypted message
      */
-    private Message decryptMessage(Message message)
+    Message decryptMessage(Message message)
     {
         if(message.getCryptoSalt() != null)
         {
