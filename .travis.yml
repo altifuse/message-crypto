@@ -12,13 +12,6 @@ script:
 services:
   - mysql
 
-sudo: required
-
-addons:
-  apt:
-    packages:
-      - mysql-server
-
 before_script:
   - mysql -u root -e "create database datablink_message_crypto;"
   - mysql -u root -e "create user 'dbmc_user'@'localhost' identified by 'dbmc_password';"
