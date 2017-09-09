@@ -26,6 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test suite responsible for authentication- and authorization-related methods
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,6 +36,9 @@ public class AccessControllerTest
 {
     // tests follow the pattern what_when_then
 
+    /**
+     * Beans autowired in the tested class
+     */
     @TestConfiguration
     static class MessageControllerTestContextConfiguration
     {
@@ -52,6 +58,10 @@ public class AccessControllerTest
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * If the user is not logged in and tries to load the login page, they should be sent to the login page
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
     public void logIn_userIsNotLoggedIn_goToLogInView() throws Exception
@@ -60,6 +70,10 @@ public class AccessControllerTest
                 .andExpect(status().isOk());
     }
 
+    /**
+     * If the user is logged in and tries to load the login page, they should be sent to the control panel
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void logIn_userIsLoggedIn_redirectToControlPanelView() throws Exception
@@ -69,6 +83,10 @@ public class AccessControllerTest
                 .andExpect(redirectedUrl("/cpanel"));
     }
 
+    /**
+     * If the user is not logged in and tries to load the registration page, they should be sent to the registration page
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
     public void registerGET_userIsNotLoggedIn_returnModelWithEmptyUser() throws Exception
@@ -79,6 +97,10 @@ public class AccessControllerTest
                         hasProperty("username", isEmptyOrNullString())));
     }
 
+    /**
+     * If the user is logged in and tries to load the registration page, they should be sent to the control panel
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void registerGET_userIsLoggedIn_redirectToControlPanelView() throws Exception
@@ -88,6 +110,13 @@ public class AccessControllerTest
                 .andExpect(redirectedUrl("/cpanel"));
     }
 
+    /**
+     * If the user is not logged in, is currently in the registration page and tries to register under the conditions:
+     * - their input is valid;
+     * - the username does not exist in the database,
+     * they should be sent to the login page
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
     public void registerPOST_userIsNotLoggedInAndInfoIsValidAndUserDoesNotExist_redirectToLogInView() throws Exception
@@ -104,9 +133,16 @@ public class AccessControllerTest
                 .andExpect(redirectedUrl("/login"));
     }
 
+    /**
+     * If the user is not logged in, is currently in the registration page and tries to register under the conditions:
+     * - their input is valid;
+     * - the username exists in the database,
+     * they should be sent back to the registration page with an error
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
-    public void registerPOST_userIsNotLoggedInAndInfoIsValidAndUserExists_redirectToRegisterView() throws Exception
+    public void registerPOST_userIsNotLoggedInAndInfoIsValidAndUserExists_redirectToRegisterViewWithError() throws Exception
     {
         User user = new User();
         user.setUsername("user");
@@ -121,9 +157,15 @@ public class AccessControllerTest
                 .andExpect(redirectedUrl("/register?exists"));
     }
 
+    /**
+     * If the user is not logged in, is currently in the registration page and tries to register under the condition:
+     * - their input is invalid,
+     * they should be sent back to the registration page with an error
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
-    public void registerPOST_userIsNotLoggedInAndInfoIsNotValid_redirectToRegisterView() throws Exception
+    public void registerPOST_userIsNotLoggedInAndInfoIsNotValid_redirectToRegisterViewWithError() throws Exception
     {
         User user = new User();
         user.setUsername("");
@@ -137,9 +179,15 @@ public class AccessControllerTest
                 .andExpect(model().hasErrors());
     }
 
+    /**
+     * If the user is not logged in, is currently in the registration page and tries to register under the condition:
+     * - their username is null (this condition should not be possible under normal usage),
+     * they should be sent back to the registration page with an error
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
-    public void registerPOST_userIsNotLoggedInAndUsernameIsNull_redirectToRegisterView() throws Exception
+    public void registerPOST_userIsNotLoggedInAndUsernameIsNull_redirectToRegisterViewWithError() throws Exception
     {
         User user = new User();
         user.setPassword("");
@@ -152,9 +200,15 @@ public class AccessControllerTest
                 .andExpect(model().hasErrors());
     }
 
+    /**
+     * If the user is not logged in, is currently in the registration page and tries to register under the condition:
+     * - their password is null (this condition should not be possible under normal usage),
+     * they should be sent back to the registration page with an error
+     * @throws Exception
+     */
     @Test
     @WithAnonymousUser
-    public void registerPOST_userIsNotLoggedInAndPasswordIsNull_redirectToRegisterView() throws Exception
+    public void registerPOST_userIsNotLoggedInAndPasswordIsNull_redirectToRegisterViewWithError() throws Exception
     {
         User user = new User();
         user.setUsername("");

@@ -27,6 +27,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * Test suite responsible for message-related methods
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,6 +37,9 @@ public class MessageControllerTest
 {
     // tests follow the pattern what_when_then
 
+    /**
+     * Beans autowired in the tested class
+     */
     @TestConfiguration
     static class MessageControllerTestContextConfiguration
     {
@@ -52,7 +58,10 @@ public class MessageControllerTest
 
     @MockBean
     private MessageRepository messageRepository;
-    
+
+    /**
+     * Mocked objects and method calls
+     */
     @Before
     public void setup()
     {
@@ -75,6 +84,9 @@ public class MessageControllerTest
 
     // BUSINESS LOGIC
 
+    /**
+     * If the user has a message stored and a method tries to get it, they should receive it
+     */
     @Test
     public void getMessage_userHasMessage_returnMessage()
     {
@@ -89,6 +101,9 @@ public class MessageControllerTest
         assertThat(response.getEncryptedMessage(), equalTo("99d0ef2a701b21838e2ebceaa9c305c63f189ea92f327e8763f5a24f460810bb"));
     }
 
+    /**
+     * If the user has no message stored and a method tries to get it, they should receive an empty Message object
+     */
     @Test
     public void getMessage_userHasNoMessage_returnEmptyMessage()
     {
@@ -103,6 +118,10 @@ public class MessageControllerTest
         assertThat(response.getEncryptedMessage(), nullValue());
     }
 
+    /**
+     * If the user inputs a valid message and a method tries to encrypt it, they should receive the Message object
+     * with the encrypted content
+     */
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void encryptMessage_messageIsValid_returnMessageWithEncryptedMessage()
@@ -120,6 +139,10 @@ public class MessageControllerTest
         assertThat(response.getEncryptedMessage(), notNullValue());
     }
 
+    /**
+     * If the user has an encrypted message in the database and a method tries to decrypt it, they should receive
+     * the Message object with the decrypted content
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
     public void decryptMessage_cryptoSaltExists_returnMessageWithDecryptedMessage()
@@ -140,6 +163,10 @@ public class MessageControllerTest
         assertThat(response.getEncryptedMessage(), equalTo("99d0ef2a701b21838e2ebceaa9c305c63f189ea92f327e8763f5a24f460810bb"));
     }
 
+    /**
+     * If the user doesn't have an encrypted message in the database and a method tries to decrypt it, they should
+     * receive the original Message object
+     */
     @Test
     @WithMockUser(username = "userHasNoEncryptedMessage", password = "password", roles = "USER")
     public void decryptMessage_cryptoSaltDoesNotExist_returnOriginalMessage()
@@ -158,7 +185,11 @@ public class MessageControllerTest
 
     // VIEWS
 
-    // edit
+    /**
+     * If the user is logged in and tries to load the edit page, they should be sent to the edit page with their
+     * Message object, be it empty or not
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
     public void editGET_userIsLoggedIn_returnModelWithMessage() throws Exception
@@ -169,7 +200,12 @@ public class MessageControllerTest
                         hasProperty("decryptedMessage", is("message"))));
     }
 
-    // submit
+    /**
+     * If the user is logged in, is currently in the edit page and tries to save a message under the conditions:
+     * - the message is valid,
+     * they should be sent to the control panel
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
     public void editPOST_userIsLoggedInAndMessageIsValid_redirectToControlPanelView() throws Exception
@@ -182,9 +218,15 @@ public class MessageControllerTest
                 .andExpect(redirectedUrl("/cpanel.html"));
     }
 
+    /**
+     * If the user is logged in, is currently in the edit page and tries to save a message under the conditions:
+     * - the message is too long,
+     * they should be sent back to the edit page with an error
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
-    public void editPOST_userIsLoggedInAndMessageIsTooLong_redirectToControlPanelView() throws Exception
+    public void editPOST_userIsLoggedInAndMessageIsTooLong_redirectToEditViewWithError() throws Exception
     {
         Message message = messageRepository.findOne("userHasMessage"); // using predefined mock
 
@@ -197,7 +239,11 @@ public class MessageControllerTest
                 .andExpect(redirectedUrl("/edit?error"));
     }
 
-    // decrypt
+    /**
+     * If the user is logged in and tries to load the decrypt page, they should be sent to the decrypt page with their
+     * Message object in the model, containing the decrypted message
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
     public void decrypt_userIsLoggedIn_returnModelWithMessage() throws Exception
@@ -208,7 +254,11 @@ public class MessageControllerTest
                         hasProperty("decryptedMessage", is("message"))));
     }
 
-    // view
+    /**
+     * If the user is logged in and tries to load the view page, they should be sent to the decrypt page with their
+     * Message object in the model, containing the encrypted message
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
     public void view_userIsLoggedIn_returnModelWithMessage() throws Exception

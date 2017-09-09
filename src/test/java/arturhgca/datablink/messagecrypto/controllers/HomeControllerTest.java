@@ -13,6 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test suite responsible for the control panel view
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -23,6 +26,10 @@ public class HomeControllerTest
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * If the user is logged in and tries to load the root page, they should be sent to the control panel
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void root_userIsLoggedIn_redirectToControlPanel() throws Exception
@@ -32,6 +39,10 @@ public class HomeControllerTest
         .andExpect(redirectedUrl("/cpanel.html"));
     }
 
+    /**
+     * If the user is logged in and tries to load the control panel, they should be sent to the control panel
+     * @throws Exception
+     */
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void cpanel_userIsLoggedIn_goToControlPanel() throws Exception

@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     }
 
     /**
-     *
+     *  This method defines how credentials are stored, both in session and in persistence
      * @param auth Object responsible for checking credentials against the database
      * @throws Exception
      */
