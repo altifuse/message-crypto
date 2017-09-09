@@ -5,7 +5,8 @@
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
         <link rel="stylesheet"
-              href="../static/main.css"/>
+              href="css/main.css"
+              th:href="@{css/main.css}"/>
         <title>Server Error | Datablink Message Crypto</title>
     </head>
     <body>
@@ -13,6 +14,11 @@
             <h1>Datablink Message Crypto</h1>
             <h2>A server error occurred</h2>
             <h3>Please contact an admin.</h3>
+            <form action="/"
+                  class="form">
+                <button class="btn waves-effect waves-light blue" type="submit">Home</button>
+            </form>
+            <br/>
         </div>
     </body>
 </html>
