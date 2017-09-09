@@ -16,3 +16,9 @@ before_script:
   - mysql -u root -e "create database datablink_message_crypto;"
   - mysql -u root -e "create user 'dbmc_user'@'localhost' identified by 'dbmc_password';"
   - mysql -u root -e "grant all on datablink_message_crypto.* to 'dbmc_user'@'localhost';"
+
+deploy:
+  provider: heroku
+  app: arturhgca-messagecrypto
+  api_key:
+    secure: $HEROKU_API_KEY

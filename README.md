@@ -6,7 +6,9 @@ It offers to registered users an interface to save, read and decrypt a secret me
 
 ## Check it out!
 
-A test deploy is currently available at [Heroku](https://boiling-savannah-18733.herokuapp.com). It may take a while to load at first; don't worry, this is because the free tier of Heroku puts all apps to sleep after 30 minutes of inactivity.
+A test deploy is currently available at [Heroku](https://arturhgca-messagecrypto.herokuapp.com). It may take a while to load at first; don't worry, this is because the free tier of Heroku puts all apps to sleep after 30 minutes of inactivity.
+
+This deploy is tied in to Travis CI - that means it is updated after every successful commit.
 
 ## How to use?
 
