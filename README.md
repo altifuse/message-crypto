@@ -8,8 +8,6 @@ It offers to registered users an interface to save, read and decrypt a secret me
 
 A test deploy is currently available at [Heroku](https://arturhgca-messagecrypto.herokuapp.com). It may take a while to load at first; don't worry, this is because the free tier of Heroku puts all apps to sleep after 30 minutes of inactivity.
 
-This deploy is tied in to Travis CI - that means it is updated after every successful commit.
-
 ## How to use?
 
 This is a self-contained web application. Therefore, after building, you only need to run the jar file and enter the application through your favorite web browser at https://{your_ip_or_hostname}:8443/.
