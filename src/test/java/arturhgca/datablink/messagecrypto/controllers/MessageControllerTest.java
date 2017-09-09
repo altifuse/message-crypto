@@ -172,7 +172,7 @@ public class MessageControllerTest
     // submit
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
-    public void editPOST_userIsLoggedInAndMessageIsValid_returnToControlPanel() throws Exception
+    public void editPOST_userIsLoggedInAndMessageIsValid_redirectToControlPanelView() throws Exception
     {
         Message message = messageRepository.findOne("userHasMessage"); // using predefined mock
         mockMvc.perform(post("/edit")
@@ -184,7 +184,7 @@ public class MessageControllerTest
 
     @Test
     @WithMockUser(username = "userHasMessage", password = "password", roles = "USER")
-    public void editPOST_userIsLoggedInAndMessageIsTooLong_returnToControlPanel() throws Exception
+    public void editPOST_userIsLoggedInAndMessageIsTooLong_redirectToControlPanelView() throws Exception
     {
         Message message = messageRepository.findOne("userHasMessage"); // using predefined mock
 

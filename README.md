@@ -65,14 +65,14 @@ This will remove any previous builds, create a uber-jar (that is, a jar file whi
 - ~~Create base project~~
 - ~~Create basic HTML templates~~
 - ~~Create corresponding controllers~~
-- ~~Implement persistence~~ 
+- ~~Implement persistence~~
 - ~~Secure credentials~~
 - ~~Implement message encryption/decryption~~
 - ~~Implement input sanitization~~
 - **Improve documentation** ◀
 - ~~Treat exceptions~~
 - ~~Improve UI/UX~~
-- **Implement unit tests** ◀
+- ~~Implement unit tests~~
 - Implement stateless session management
 
 ## Technologies
@@ -85,6 +85,7 @@ The project uses the following technologies (so far):
 - IDE: **[IntelliJ IDEA](https://www.jetbrains.com/idea/)**, because I'm used to and like PyCharm
 - Persistence: **[MySQL](https://www.mysql.com/)**
 - CSS framework: [**Materialize**](http://materializecss.com/) with [jQuery](https://jquery.com/)
+- Testing: [**JUnit**](http://junit.org/junit4/) with [Mockito](http://site.mockito.org/) and [Hamcrest](http://hamcrest.org/)
 
 ## Challenges
 

@@ -82,6 +82,11 @@ public class AccessController
             return "register";
         }
 
+        if(userRepository.findOne(user.getUsername()) != null)
+        {
+            return "redirect:/register?exists";
+        }
+
         // encode password
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
